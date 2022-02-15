@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import MeetupList from "../components/meetups/MeetupList";
 
 const DUMMY_DATA = [
@@ -29,35 +28,16 @@ const DUMMY_DATA = [
   },
 ];
 
-const HomePage = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [loadedMeetups, setLoadedMeetups] = useState([]);
+const HomePage = (props) => {
+  return <MeetupList meetups={props.meetups} />;
+};
 
-  useEffect(() => {
-    setIsLoading(true);
-    fetch(
-      "https://react-meetups-2b66e-default-rtdb.firebaseio.com/meetups.json"
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        const meetups = [];
-
-        for (const key in data) {
-          const meetup = {
-            id: key,
-            ...data[key],
-          };
-
-          meetups.push(meetup);
-        }
-
-        setIsLoading(false);
-        setLoadedMeetups(meetups);
-      });
-  }, []);
-  return <MeetupList meetups={loadedMeetups} />;
+export const getStaticProps = async () => {
+  return {
+    props: {
+      meetups: DUMMY_DATA,
+    },
+  };
 };
 
 export default HomePage;
