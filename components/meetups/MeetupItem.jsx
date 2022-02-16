@@ -6,7 +6,7 @@ import classes from "./MeetupItem.module.css";
 
 const MeetupItem = (props) => {
   const router = useRouter();
-  const showDetailsPageHandler = () => {
+  const showDetailsScreenHandler = () => {
     router.push("/" + props.id);
   };
 
@@ -22,7 +22,7 @@ const MeetupItem = (props) => {
           <p>{props.description}</p>
         </div>
         <div className={classes.actions}>
-          <button onClick={showDetailsPageHandler}>{"Show Details"}</button>
+          <button onClick={showDetailsScreenHandler}>{"Show Details"}</button>
         </div>
       </Card>
     </li>
